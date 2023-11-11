@@ -38,8 +38,21 @@ db.test.find({ age: { $type: "string" } });
 db.test.find({ company: { $type: "null" } }, { company: 1 })[
   {
     _id: ObjectId("6406ad65fc13ae5a400000c6"),
-    age: "45",
+    company: null,
   }
+];
+
+// Finding all document with array size:
+// $size --> returns all that matches the specified size of an array:
+
+db.test.find({ friends: { $size: 0 } }, { friends: 1 }).sort({ age: 1 });
+// Results:
+[
+  {
+    _id: ObjectId("6406ad65fc13ae5a400000c6"),
+    age: "45",
+    friends: [],
+  },
 ];
 
 // =================================================================
