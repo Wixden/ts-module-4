@@ -82,4 +82,48 @@ db.test.find({ "skills.name": { $in: ["JAVASCRIPT", "PYTHON"] } });
   },
 ];
 
+// $not --> Does not exist or Field is Not in the document:
+// $not --> $not performs a logical NOT operation on the specified <operator-expression> and selects the documents that do not match the <operator-expression>. This includes documents that do not contain the field.
+db.test.find({ age: { $not: { $lte: 18 } } }, { age: 1 }).sort({ age: 1 })[ //When we mean less than or equal to 18 it will exclude those and return a document without them
+  // Results;
+  ({
+    _id: ObjectId("6406ad64fc13ae5a40000096"),
+    age: 19,
+  },
+  /* 2 createdAt:07/03/2023, 09:20:03*/
+  {
+    _id: ObjectId("6406ad63fc13ae5a40000065"),
+    age: 21,
+  },
+  /* 3 createdAt:07/03/2023, 09:20:05*/
+  {
+    _id: ObjectId("6406ad65fc13ae5a400000bd"),
+    age: 23,
+  })
+];
+
+// $nor --> One or more field value is not true. in normal operator it will return what is specified but in this case it will return the opposite:
+// $nor --> $nor performs a logical NOR operation on an array of one or more query expression and selects the documents that fail all the query expressions in the array. The  $nor  has the following syntax:
+db.test
+  .find({ $nor: [{ age: { $lte: 18 } }, { age: { $gte: 35 } }] }, { age: 1 })
+  .sort({ age: 1 }); //When we mean less than or equal to 18 it will exclude those and return a document without them
+
+[
+  // Results;
+  {
+    _id: ObjectId("6406ad64fc13ae5a40000096"),
+    age: 19,
+  },
+
+  /* 2 createdAt:07/03/2023, 09:20:03*/
+  {
+    _id: ObjectId("6406ad63fc13ae5a40000065"),
+    age: 21,
+  },
+  {
+    _id: ObjectId("6406ad65fc13ae5a400000ac"),
+    age: 32,
+  },
+];
+
 // =================================================================
