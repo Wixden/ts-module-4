@@ -48,4 +48,23 @@ db.test.find({ age: { $gte: 18, $lte: 30 } }, { age: 1 });
   },
 ];
 
+// Finding all person with even number age between 18 and 30
+db.test
+  .find({ age: { $in: [18, 20, 22, 24, 26, 28, 30] } }, { age: 1 })
+  .sort({ age: 1 })[
+  // Results:
+  ({
+    _id: ObjectId("6406ad64fc13ae5a4000006d"),
+    age: 18,
+  },
+  {
+    _id: ObjectId("6406ad64fc13ae5a40000082"),
+    age: 24,
+  },
+  {
+    _id: ObjectId("6406ad64fc13ae5a4000006f"),
+    age: 26,
+  })
+];
+
 // =================================================================
