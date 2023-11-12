@@ -42,6 +42,7 @@ db.test.find({ company: { $type: "null" } }, { company: 1 })[
   }
 ];
 
+// Array Query
 // Finding all document with array size:
 // $size --> returns all that matches the specified size of an array:
 
