@@ -31,4 +31,8 @@ db.students.updateOne({ _id: 1, grades: 80 }, { $set: { "grades.$": 82 } });
   { _id: 3, grades: [85, 100, 90] },
 ];
 
+// Increment a field by the specified value :
+// $inc
+db.test.find({ _id: ObjectId("6406ad63fc13ae5a40000065") }, { age: 1 });
+
 // =================================================================
